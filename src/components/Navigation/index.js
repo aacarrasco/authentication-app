@@ -4,9 +4,14 @@ import { Flex, Text } from '@chakra-ui/core';
 
 import SignOut from '../SignOut';
 import * as ROUTES from '../../constants/routes';
+import { AuthUserContext } from '../../context/Session';
 
 const Navigation = ({ authUser }) => (
-  <div>{authUser ? <NavigationAuth /> : <NavigationNonAuth />}</div>
+  <div>
+    <AuthUserContext.Consumer>
+      {(authUser) => (authUser ? <NavigationAuth /> : <NavigationNonAuth />)}
+    </AuthUserContext.Consumer>
+  </div>
 );
 
 const NavigationAuth = (props) => {
