@@ -1,38 +1,40 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Flex, Text } from '@chakra-ui/core';
+import { Flex, Text, Link as ChakraLink } from '@chakra-ui/core';
 
 import SignOut from '../SignOut';
 import * as ROUTES from '../../constants/routes';
 import { AuthUserContext } from '../../context/Session';
 
-const Navigation = ({ authUser }) => (
+import { ReactComponent as DevchallengesLogo } from '../../assets/images/devchallenges.svg';
+
+const Navigation = () => (
   <div>
     <AuthUserContext.Consumer>
-      {(authUser) => (authUser ? <NavigationAuth /> : <NavigationNonAuth />)}
+      {(authUser) =>
+        authUser ? <NavigationAuth user={authUser} /> : <NavigationNonAuth />
+      }
     </AuthUserContext.Consumer>
   </div>
 );
 
-const NavigationAuth = (props) => {
+const NavigationAuth = ({ user }) => {
   return (
     <Flex
       as='nav'
       align='center'
       justify='space-between'
       wrap='wrap'
-      padding='1.5rem'
-      {...props}
+      padding={6}
     >
+      <DevchallengesLogo />
+      <Text>{user.email}</Text>
       <ul>
         <li>
-          <Link to={ROUTES.SIGN_IN}>Sign In</Link>
+          <Link to={ROUTES.ACCOUNT}>My Profile</Link>
         </li>
         <li>
-          <Link to={ROUTES.LANDING}>Landing</Link>
-        </li>
-        <li>
-          <Link to={ROUTES.ACCOUNT}>Account</Link>
+          <ChakraLink isDisabled>Group Chat</ChakraLink>
         </li>
         <li>
           <SignOut />
@@ -42,6 +44,6 @@ const NavigationAuth = (props) => {
   );
 };
 
-const NavigationNonAuth = () => <Text>Not authorized</Text>;
+const NavigationNonAuth = () => <Flex p={6}></Flex>;
 
 export default Navigation;
