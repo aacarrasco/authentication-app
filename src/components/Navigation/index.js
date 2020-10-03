@@ -1,10 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Flex } from '@chakra-ui/core';
+import { Flex, Text } from '@chakra-ui/core';
 
+import SignOut from '../SignOut';
 import * as ROUTES from '../../constants/routes';
 
-const Navigation = (props) => {
+const Navigation = ({ authUser }) => (
+  <div>{authUser ? <NavigationAuth /> : <NavigationNonAuth />}</div>
+);
+
+const NavigationAuth = (props) => {
   return (
     <Flex
       as='nav'
@@ -24,9 +29,14 @@ const Navigation = (props) => {
         <li>
           <Link to={ROUTES.ACCOUNT}>Account</Link>
         </li>
+        <li>
+          <SignOut />
+        </li>
       </ul>
     </Flex>
   );
 };
+
+const NavigationNonAuth = () => <Text>Not authorized</Text>;
 
 export default Navigation;
