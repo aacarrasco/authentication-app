@@ -18,7 +18,7 @@ const App = () => (
       <Route
         exact
         path={ROUTES.LANDING}
-        render={() => <Redirect to={ROUTES.SIGN_IN} />}
+        render={() => <Redirect to={ROUTES.ACCOUNT} />}
       />
       <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
       <Route path={ROUTES.SIGN_IN} component={SignInPage} />

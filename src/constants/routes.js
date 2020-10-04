@@ -1,5 +1,6 @@
-export const LANDING = '/';
-export const SIGN_UP = '/signup';
-export const SIGN_IN = '/signin';
-export const ACCOUNT = '/account';
-export const ADMIN = '/admin';
+const HOME = '/authentication-app';
+export const LANDING = `${HOME}/`;
+export const SIGN_UP = `${HOME}/signup`;
+export const SIGN_IN = `${HOME}/signin`;
+export const ACCOUNT = `${HOME}/account`;
+export const ADMIN = `${HOME}/admin`;
