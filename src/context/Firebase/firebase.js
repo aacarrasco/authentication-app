@@ -32,6 +32,16 @@ class Firebase {
   getUserWithUid = (uid) => this.db.ref(`users/${uid}`);
 
   getUsers = () => this.db.ref('users');
+
+  updateUser = (uid, user, password) => {
+    return Promise.resolve()
+      .then(() => {
+        if (password) {
+          return this.auth.currentUser.updatePassword(password);
+        }
+      })
+      .then(() => this.db.ref(`users/${uid}`).update(user));
+  };
 }
 
 export default Firebase;

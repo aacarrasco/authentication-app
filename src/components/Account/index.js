@@ -3,6 +3,7 @@ import { Button, Flex, Text } from '@chakra-ui/core';
 
 import { AuthUserContext, withAuthorization } from '../../context/Session';
 
+import EditProfile from './EditProfile';
 import ShowProfile from './ShowProfile';
 
 const INITIAL_STATE = {
@@ -52,9 +53,9 @@ class Account extends Component {
           <Flex direction='column' alignItems='center'>
             {loading && <div>Loading ...</div>}
             {isEdit ? (
-              <Flex>
+              <Flex direction='column' alignItems='center'>
                 <Button onClick={this.toggleView}>Back</Button>
-                {/* TODO: Add update profile view */}
+                <EditProfile user={user} />
               </Flex>
             ) : (
               <Flex direction='column' alignItems='center'>
