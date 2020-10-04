@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { Button, Flex, Input, Text } from '@chakra-ui/core';
 
+import SocialSignIn from './SocialSignIn';
+
 import { ReactComponent as DevchallengesLogo } from '../../assets/images/devchallenges.svg';
 
 import { withFirebase } from '../../context/Firebase';
@@ -19,6 +21,7 @@ const SignInPage = () => (
     <DevchallengesLogo />
     <Text>Login</Text>
     <SignInForm />
+    <SocialSignIn />
     <Text>
       Don't have an account yet? <Link to={ROUTES.SIGN_UP}>Register</Link>
     </Text>
