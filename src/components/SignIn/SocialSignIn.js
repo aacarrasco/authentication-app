@@ -7,6 +7,7 @@ import { withFirebase } from '../../context/Firebase';
 
 import { ReactComponent as Google } from '../../assets/images/Google.svg';
 import { ReactComponent as Facebook } from '../../assets/images/Facebook.svg';
+import { ReactComponent as Twitter } from '../../assets/images/Twitter.svg';
 
 import * as ROUTES from '../../constants/routes';
 
@@ -108,12 +109,62 @@ const SignInWithFacebook = compose(
   withFirebase
 )(SignInWithFacebookBase);
 
+class SignInWithTwitterBase extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { error: null };
+  }
+
+  onSubmit = (event) => {
+    this.props.firebase
+      .doSignInWithTwitter()
+      .then((authUser) => {
+        if (authUser.additionalUserInfo.isNewUser) {
+          return this.props.firebase.getUserWithUid(authUser.user.uid).set({
+            name: authUser.additionalUserInfo.profile.name,
+            biography: authUser.additionalUserInfo.profile.description,
+            phone: '',
+            email: authUser.user.email || '',
+          });
+        }
+      })
+      .then(() => {
+        this.setState({ error: null });
+        this.props.history.push(ROUTES.ACCOUNT);
+      })
+      .catch((error) => {
+        this.setState({ error });
+      });
+
+    event.preventDefault();
+  };
+
+  render() {
+    const { error } = this.state;
+    return (
+      <form onSubmit={this.onSubmit}>
+        <button class='svg-button' type='submit'>
+          <Twitter />
+        </button>
+        {error && <p>{error.message}</p>}
+      </form>
+    );
+  }
+}
+
+const SignInWithTwitter = compose(
+  withRouter,
+  withFirebase
+)(SignInWithTwitterBase);
+
 const SocialSignIn = () => (
   <Flex direction='column'>
     <Text>or continue with these social profile</Text>
     <Flex direction='row'>
       <SignInWithGoogle />
       <SignInWithFacebook />
+      <SignInWithTwitter />
     </Flex>
   </Flex>
 );
