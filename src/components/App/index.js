@@ -12,7 +12,7 @@ import { withAuthentication } from '../../context/Session';
 import * as ROUTES from '../../constants/routes';
 
 const App = () => (
-  <Flex direction='column'>
+  <Flex direction='column' align='center'>
     <Router>
       <Navigation />
       <Route
