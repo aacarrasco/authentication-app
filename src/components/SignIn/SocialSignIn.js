@@ -95,7 +95,7 @@ class SignInWithFacebookBase extends Component {
     const { error } = this.state;
     return (
       <form onSubmit={this.onSubmit}>
-        <button class='svg-button' type='submit'>
+        <button className='svg-button' type='submit'>
           <Facebook />
         </button>
         {error && <p>{error.message}</p>}
@@ -144,7 +144,7 @@ class SignInWithTwitterBase extends Component {
     const { error } = this.state;
     return (
       <form onSubmit={this.onSubmit}>
-        <button class='svg-button' type='submit'>
+        <button className='svg-button' type='submit'>
           <Twitter />
         </button>
         {error && <p>{error.message}</p>}
